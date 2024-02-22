@@ -3,7 +3,7 @@ import { Cart } from "./Cart";
 
 const Header = () => {
   return (
-    <div className="flex w-3/4 my-8 items-center justify-between">
+    <div className="flex w-5/12 my-8 items-center justify-between">
       <button className="flex px-4 rounded-md transition-all fill-logo-on-hover">
         <Book size={32} className="transition-all" />
         <h1 className="font-display text-2xl font-bold transition-all">
