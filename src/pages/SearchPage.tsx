@@ -1,10 +1,15 @@
+import { useTheme } from "@mui/material";
 import { SearchBar } from "../components/SearchBar";
 import { Page } from "../layouts/Page";
 
 const SearchPage = () => {
+  const theme = useTheme();
+
   return (
     <Page>
-      <p>Search Page Placeholder</p>
+      <p style={{ color: theme.palette.primary.main }}>
+        Search Page Placeholder
+      </p>
       <SearchBar />
     </Page>
   );
