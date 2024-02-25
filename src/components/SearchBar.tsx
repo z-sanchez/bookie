@@ -17,7 +17,7 @@ const SearchBar = () => {
         className="w-full"
         label="Search Books"
         variant="standard"
-        color="secondary"
+        color="primary"
       />
     </Box>
   );
