@@ -1,6 +1,6 @@
-import { ReactElement } from "react";
+import { ReactNode } from "react";
 
-const Page = ({ children }: { children: ReactElement[] }) => {
+const Page = ({ children }: { children: ReactNode }) => {
   return <div className="w-full">{children}</div>;
 };
 

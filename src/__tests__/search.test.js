@@ -1,7 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { filterSearchByTerm } from "../utils/helpers/search";
-
-const possibleSearchValues = ["Yeto", "Shake Shack", "Glass", "Shingle Tap"];
+import { possibleSearchValues } from "./fixtures/search";
 
 describe("Filter Search", () => {
   test('Search by Term "" ', () => {

@@ -1,7 +1,7 @@
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import { Box, TextField } from "@mui/material";
 
-const SearchBar = () => {
+const SearchBar = ({ onChange }: { onChange: (term: string) => void }) => {
   return (
     <Box
       sx={{
@@ -18,6 +18,7 @@ const SearchBar = () => {
         label="Search Books"
         variant="standard"
         color="primary"
+        onChange={(searchTermEvent) => onChange(searchTermEvent.target.value)}
       />
     </Box>
   );
