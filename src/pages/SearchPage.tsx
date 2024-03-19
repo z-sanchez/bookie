@@ -1,15 +1,20 @@
 import { useTheme } from "@mui/material";
 import { SearchBar } from "../components/SearchBar";
 import { Page } from "../layouts/Page";
-import { useState } from "react";
-import { Product } from "../types/Product";
 import { filterSearchByTerm } from "../utils/helpers/search";
-import { possibleSearchValues } from "../__tests__/fixtures/search";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_BOOKS } from "../connectors/queries/books";
+import { Book } from "../types/Book";
+import { useState } from "react";
 
 const SearchPage = () => {
-  const [searchResults, setSearchResults] =
-    useState<Product[]>(possibleSearchValues);
   const theme = useTheme();
+  const [searchResults, setSearchResults] = useState<string[]>([]);
+  const { data, loading } = useQuery(GET_ALL_BOOKS);
+
+  const books = loading ? [] : (data.getBooks as Book[]);
+
+  const searchValues = books.map(({ title }) => title);
 
   return (
     <Page>
@@ -18,11 +23,11 @@ const SearchPage = () => {
       </p>
       <SearchBar
         onChange={(term) => {
-          setSearchResults(filterSearchByTerm(term, possibleSearchValues));
+          setSearchResults(filterSearchByTerm(term, searchValues));
         }}
       />
-      {searchResults.map((product) => {
-        return <p key={product}>{product}</p>;
+      {searchResults.map((book) => {
+        return <p key={book}>{book}</p>;
       })}
     </Page>
   );
