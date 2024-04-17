@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { SEARCH_BOOKS_BY_TERM } from "../connectors/queries/books";
 import { Book } from "../types/Book";
 import { useState } from "react";
+import { SearchBooksByTermResponse } from "../types/GraphQL/Books";
 
 const SearchPage = () => {
   const theme = useTheme();
@@ -17,9 +18,7 @@ const SearchPage = () => {
         term: "",
       },
     },
-    onCompleted: (data: {
-      searchBooks: { books: Book[]; moreResults: boolean };
-    }) => {
+    onCompleted: (data: SearchBooksByTermResponse) => {
       setResults(data.searchBooks.books);
     },
   });
