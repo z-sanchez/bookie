@@ -8,5 +8,5 @@ export type Book = {
   price: number;
   quantityAvailable: number;
   imageURL: string;
-  genre: Genre[];
+  getGenres: Genre[];
 };

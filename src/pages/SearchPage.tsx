@@ -1,4 +1,3 @@
-import { useTheme } from "@mui/material";
 import { SearchBar } from "../components/SearchBar";
 import { Page } from "../layouts/Page";
 import { useQuery } from "@apollo/client";
@@ -6,9 +5,9 @@ import { SEARCH_BOOKS_BY_TERM } from "../connectors/queries/books";
 import { Book } from "../types/Book";
 import { useState } from "react";
 import { SearchBooksByTermResponse } from "../types/GraphQL/Books";
+import { BookItem } from "../components/BookItem";
 
 const SearchPage = () => {
-  const theme = useTheme();
   const [results, setResults] = useState<Book[]>([]);
 
   const { loading } = useQuery(SEARCH_BOOKS_BY_TERM, {
@@ -25,12 +24,9 @@ const SearchPage = () => {
 
   return loading ? null : (
     <Page>
-      <p style={{ color: theme.palette.primary.main }}>
-        Search Page Placeholder
-      </p>
       <SearchBar onChange={() => null} />
       {results.map((book) => {
-        return <p key={book.id}>{book.title}</p>;
+        return <BookItem key={book.id} bookData={book} />;
       })}
     </Page>
   );
