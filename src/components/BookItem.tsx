@@ -1,7 +1,10 @@
+import { useCartStoreSelectors } from "../state/cart-store";
 import { Book } from "../types/Book";
 import { Basket } from "@phosphor-icons/react";
 
 const BookItem = ({ bookData }: { bookData: Book }) => {
+  const addBookToCart = useCartStoreSelectors.use.addBookToCart();
+
   return (
     <div className="w-full mb-2 mt-4 py-5 px-3 flex flex-col sm:flex-row items-center sm:outline outline-1 rounded-md outline-slate-200 sm:hover:shadow-xl sm:hover:shadow-shadow ease-in-out transition-all cursor-pointer">
       <img
@@ -12,7 +15,7 @@ const BookItem = ({ bookData }: { bookData: Book }) => {
         <p className="text-xl">{bookData.title}</p>
         <div className="flex justify-center md:mb-4 sm:self-start">
           {bookData.getGenres.map((genre) => (
-            <p className="mr-2 text-primary text-sm" key={genre.genreId}>
+            <p className="mr-2 text-primary text-sm" key={genre.genreName}>
               {genre.genreName}
             </p>
           ))}
@@ -24,7 +27,10 @@ const BookItem = ({ bookData }: { bookData: Book }) => {
               <p className="font-bold text-xl">${bookData.price} USD</p>
               <p className="text-xs">Author: {bookData.author}</p>
             </div>
-            <button className="flex items-center justify-center text-primary bg-primary md:w-5/12 sm:w-full w-3/12 py-2 text-center rounded-md text-white hover:bg-white hover:outline-primary hover:outline-1 hover:outline hover:text-primary transition-all ease-in-out">
+            <button
+              onClick={() => addBookToCart(bookData)}
+              className="flex items-center justify-center text-primary bg-primary md:w-5/12 sm:w-full w-3/12 py-2 text-center rounded-md text-white hover:bg-white hover:outline-primary hover:outline-1 hover:outline hover:text-primary transition-all ease-in-out"
+            >
               <Basket size={20} className="mr-2" />
               <span>Add To Cart</span>
             </button>

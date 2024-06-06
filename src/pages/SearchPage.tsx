@@ -25,6 +25,9 @@ const SearchPage = () => {
   return loading ? null : (
     <Page>
       <SearchBar onChange={() => null} />
+      <button className="flex mt-4 mx-auto items-center justify-center text-primary bg-primary md:w-5/12 sm:w-full w-3/12 py-2 text-center rounded-md text-white hover:bg-white hover:outline-primary hover:outline-1 hover:outline hover:text-primary transition-all ease-in-out">
+        <span>Buy Books</span>
+      </button>
       {results.map((book) => {
         return <BookItem key={book.id} bookData={book} />;
       })}
