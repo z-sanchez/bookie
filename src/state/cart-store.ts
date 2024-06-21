@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { Book } from "../types/Book";
 import { createSelectors } from "./create-selectors";
 
-interface CartState {
+interface CartStoreInterface {
   booksInCart: Book[];
   numberOfBooksInCart: number;
   addBookToCart: (book: Book) => void;
@@ -12,7 +12,7 @@ interface CartState {
   }) => void;
 }
 
-export const useCartStore = create<CartState>()((set) => ({
+export const useCartStore = create<CartStoreInterface>()((set) => ({
   booksInCart: [],
   numberOfBooksInCart: 0,
   addBookToCart: (book: Book) =>
