@@ -2,15 +2,12 @@ import { ThemeProvider } from "@emotion/react";
 import { Container } from "./layouts/Container";
 import { SearchPage } from "./pages/SearchPage";
 import { theme } from "./Theme";
-import { useCartStoreSelectors } from "./state/cart-store";
+import { useInitializeState } from "./hooks/useInitializeState";
 
 function App() {
-  const initializeCartData = useCartStoreSelectors.use.initializeCartData();
+  const { initialize } = useInitializeState();
 
-  const storeCart = localStorage.getItem("store-cart");
-  const cartData = storeCart ? JSON.parse(storeCart) : {};
-
-  initializeCartData(cartData);
+  initialize();
 
   return (
     <ThemeProvider theme={theme}>
