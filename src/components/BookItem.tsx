@@ -1,8 +1,8 @@
 import { useCartStoreSelectors } from "../state/cart-store";
-import { Book } from "../types/Book";
+import { BookResponse } from "../types/Book";
 import { Basket } from "@phosphor-icons/react";
 
-const BookItem = ({ bookData }: { bookData: Book }) => {
+const BookItem = ({ bookData }: { bookData: BookResponse }) => {
   const addBookToCart = useCartStoreSelectors.use.addBookToCart();
 
   return (
@@ -28,7 +28,12 @@ const BookItem = ({ bookData }: { bookData: Book }) => {
               <p className="text-xs">Author: {bookData.author}</p>
             </div>
             <button
-              onClick={() => addBookToCart(bookData)}
+              onClick={() => {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                const { quantityAvailable, ...data } = bookData;
+
+                addBookToCart({ ...data, quantity: 1 });
+              }}
               className="flex items-center justify-center text-primary bg-primary md:w-5/12 sm:w-full w-3/12 py-2 text-center rounded-md text-white hover:bg-white hover:outline-primary hover:outline-1 hover:outline hover:text-primary transition-all ease-in-out"
             >
               <Basket size={20} className="mr-2" />

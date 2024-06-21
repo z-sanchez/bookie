@@ -1,4 +1,4 @@
-import { Book } from "../Book";
+import { BookResponse } from "../Book";
 
 export type SearchBooksByTermInput = {
   limit?: number;
@@ -7,5 +7,5 @@ export type SearchBooksByTermInput = {
 };
 
 export type SearchBooksByTermResponse = {
-  searchBooks: { books: Book[]; moreResults: boolean };
+  searchBooks: { books: BookResponse[]; moreResults: boolean };
 };
