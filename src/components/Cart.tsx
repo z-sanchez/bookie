@@ -1,13 +1,13 @@
 import { Basket } from "@phosphor-icons/react";
-import { useCartStoreSelectors } from "../state/cart-store";
+import { useCart } from "../hooks/useCart";
 
 const Cart = () => {
-  const numberOfBooksInCart = useCartStoreSelectors.use.numberOfBooksInCart();
+  const { getNumberOfBooksInCart } = useCart();
 
   return (
     <button>
       <Basket size={32} className="fill-on-hover transition-all" />
-      <span className="text-primary">{numberOfBooksInCart}</span>
+      <span className="text-primary">{getNumberOfBooksInCart()}</span>
     </button>
   );
 };

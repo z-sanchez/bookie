@@ -1,9 +1,9 @@
-import { useCartStoreSelectors } from "../state/cart-store";
+import { useCart } from "../hooks/useCart";
 import { BookResponse } from "../types/Book";
 import { Basket } from "@phosphor-icons/react";
 
 const BookItem = ({ bookData }: { bookData: BookResponse }) => {
-  const addBookToCart = useCartStoreSelectors.use.addBookToCart();
+  const { addBookToCart } = useCart();
 
   return (
     <div className="w-full mb-2 mt-4 py-5 px-3 flex flex-col sm:flex-row items-center sm:outline outline-1 rounded-md outline-slate-200 sm:hover:shadow-xl sm:hover:shadow-shadow ease-in-out transition-all cursor-pointer">
