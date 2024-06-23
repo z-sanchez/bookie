@@ -1,25 +1,30 @@
 import { describe, expect, test } from "vitest";
+import { useCartStore } from "../state/cart-store";
 import { render } from "@testing-library/react";
-import { BookItem } from "../components/BookItem";
+import { useEffect } from "react";
 
-const bookToAdd = {
-  id: "123",
-  author: "Test Author",
-  title: "Test Book",
-  description: "Test Book Description",
-  price: 12.34,
-  imageURL: "imgSrc",
-  quantityAvailable: 3,
-  getGenres: [],
+const TestComponent = ({
+  getNumberOfBooks,
+}: {
+  getNumberOfBooks: (books: number) => void;
+}) => {
+  const numberOfBooksInCart = useCartStore(
+    (state) => state.numberOfBooksInCart
+  );
+
+  useEffect(() => {
+    getNumberOfBooks(numberOfBooksInCart);
+  }, [getNumberOfBooks, numberOfBooksInCart]);
+
+  return null;
 };
 
 describe("Cart Store Test", () => {
   test("Add Book To Store", () => {
-    renderComponent();
-    expect(3).toEqual(3);
+    const getNumberOfBooks = vi.fn();
+
+    render(<TestComponent getNumberOfBooks={getNumberOfBooks} />);
+
+    expect(getNumberOfBooks).toBeCalledWith(0);
   });
 });
-
-const renderComponent = () => {
-  return render(<BookItem bookData={bookToAdd} />);
-};
