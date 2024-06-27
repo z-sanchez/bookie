@@ -1,0 +1,43 @@
+name: Deploy to DigitalOcean Droplet
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build React App
+        run: npm run build
+
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: root
+          key: ${{ secrets.DO_SSH_KEY }}
+          source: "dist/*"
+          target: "/var/www/${{ secrets.DROPLET_IP }}"
+
+      - name: Restart Nginx
+        run: |
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} << 'EOF'
+            sudo systemctl restart nginx
+          EOF
+        env:
+          DROPLET_IP: ${{ secrets.DROPLET_IP }}
+          DO_SSH_KEY: ${{ secrets.DO_SSH_KEY }}

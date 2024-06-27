@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --color-primary: #ca2f8f;
+    --color-primary: #2f51ca;
     --color-shadow: rgba(202, 47, 143, 0.253);
   }
 }
