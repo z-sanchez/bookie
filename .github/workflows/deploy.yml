@@ -33,6 +33,11 @@ jobs:
           source: "dist/*"
           target: "/var/www/${{ secrets.DROPLET_IP }}"
 
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.DO_SSH_KEY }}
+
       - name: Restart Nginx
         run: |
           ssh -tt -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} 'sudo systemctl restart nginx'
