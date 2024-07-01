@@ -35,9 +35,7 @@ jobs:
 
       - name: Restart Nginx
         run: |
-          ssh -tt -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} << 'EOF'
-            sudo systemctl restart nginx
-          EOF
+          ssh -tt -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} 'sudo systemctl restart nginx'
         env:
           DROPLET_IP: ${{ secrets.DROPLET_IP }}
           DO_SSH_KEY: ${{ secrets.DO_SSH_KEY }}
