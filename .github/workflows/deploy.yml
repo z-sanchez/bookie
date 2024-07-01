@@ -35,7 +35,7 @@ jobs:
 
       - name: Restart Nginx
         run: |
-          ssh -t -o StrictHostKeyChecking=no  -o PasswordAuthentication=yes root@${{ secrets.DROPLET_IP }} << 'EOF'
+          ssh -tt -o StrictHostKeyChecking=no  -o PasswordAuthentication=yes root@${{ secrets.DROPLET_IP }} << 'EOF'
             sudo systemctl restart nginx
           EOF
         env:
